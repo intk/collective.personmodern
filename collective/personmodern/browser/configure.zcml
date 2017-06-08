@@ -8,7 +8,7 @@
       template="person_view.pt"
       class=".person.PersonView"
       permission="zope2.View"
-      layer="collective.person.interfaces.IBrowserLayer"
+      layer="collective.personmodern.interfaces.IBrowserLayer"
       />
 
 </configure>
