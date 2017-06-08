@@ -1,0 +1,4 @@
+Person
+======
+
+Person content type
