@@ -9,4 +9,6 @@ from plone.i18n.normalizer.interfaces import INormalizer
 @indexer(IPerson)
 def lastname(person):
     return getUtility(INormalizer).normalize(person.lastname)
+
+    
     

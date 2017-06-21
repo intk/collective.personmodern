@@ -4,6 +4,57 @@ from plone.dexterity.content import Item, Container
 from plone.app.content.interfaces import INameFromTitle
 from plone.dexterity.utils import safe_unicode
 
+from plone.app.content.interfaces import INameFromTitle
+
+class INameFromPersonNames(INameFromTitle):
+    def title():
+        """Return a processed title"""
+
+class NameFromPersonNames(object):
+    implements(INameFromPersonNames)
+
+    def __init__(self, context):
+        self.context = context
+
+    def generate_title(self):
+        names = ""
+        if hasattr(self.context, 'firstname') and hasattr(self.context, 'lastname'):
+            if not self.context.firstname:
+                names = self.context.lastname
+            elif not self.context.lastname:
+                names = self.context.firstname
+            else:
+                names = self.context.firstname + " " + self.context.lastname
+
+        extra = []
+        if hasattr(self.context, 'nationality'):
+            if self.context.nationality:
+                extra.append(self.context.nationality)
+        if hasattr(self.context, 'year'):
+            if self.context.year:
+                extra.append(self.context.year)
+
+        extra_text = ', '.join(extra)
+
+        if names and extra_text:
+            final_text = "%s (%s)" %(names, extra_text)
+            return final_text
+        elif names and not extra_text:
+            final_text = "%s" %(names)
+            return final_text
+        else:
+            # this is a CMF accessor, so should return utf8-encoded
+            if isinstance(self.context.title, unicode):
+                return self.context.title.encode('utf-8')
+            return self.context.title or ''
+
+    @property
+    def title(self):
+        title = self.generate_title()
+        if isinstance(title, unicode):
+            return title
+        return title
+
 
 class IPerson(Interface):
     """  Interface for Person content type """
@@ -15,7 +66,12 @@ class Person(Container):
     def generate_title(self):
         names = ""
         if hasattr(self, 'firstname') and hasattr(self, 'lastname'):
-            names = self.firstname + " " + self.lastname
+            if not self.firstname:
+                names = self.lastname
+            elif not self.lastname:
+                names = self.firstname
+            else:
+                names = self.firstname + " " + self.lastname
 
         extra = []
         if hasattr(self, 'nationality'):
@@ -47,7 +103,6 @@ class Person(Container):
         return title
 
     def setTitle(self, title):
-        print "SET TITLE"
         # Set Dublin Core Title element - resource name.
         self.title = safe_unicode(title)
 

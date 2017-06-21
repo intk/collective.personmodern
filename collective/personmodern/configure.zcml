@@ -22,6 +22,11 @@
     provides="Products.GenericSetup.interfaces.EXTENSION"
     />
     
+  <adapter for="collective.personmodern.person.IPerson"
+    provides="collective.personmodern.person.INameFromPersonNames"
+    factory="collective.personmodern.person.NameFromPersonNames"
+    />
+    
   <adapter
     factory=".indexers.lastname"
     name="lastname"
