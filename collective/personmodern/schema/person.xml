@@ -13,6 +13,11 @@
         <required>False</required>
         <title i18n:translate="label_person_lastname">Last name</title>
       </field>
+      <field name="middlename" type="zope.schema.TextLine" indexer:searchable="true">
+        <description />
+        <required>False</required>
+        <title i18n:translate="label_person_middlename">Middle name</title>
+      </field>
       <field name="nationality" type="zope.schema.TextLine" indexer:searchable="true">
         <description />
         <required>False</required>

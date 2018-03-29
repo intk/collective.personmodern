@@ -17,14 +17,10 @@ class NameFromPersonNames(object):
         self.context = context
 
     def generate_title(self):
+        names_list = [getattr(self.context, 'firstname', None), getattr(self.context, 'middlename', None), getattr(self.context, 'lastname', None)]
+        names = " ".join([name for name in names_list if name])
+
         names = ""
-        if hasattr(self.context, 'firstname') and hasattr(self.context, 'lastname'):
-            if not self.context.firstname:
-                names = self.context.lastname
-            elif not self.context.lastname:
-                names = self.context.firstname
-            else:
-                names = self.context.firstname + " " + self.context.lastname
 
         extra = []
         if hasattr(self.context, 'nationality'):
@@ -65,13 +61,8 @@ class Person(Container):
 
     def generate_title(self):
         names = ""
-        if hasattr(self, 'firstname') and hasattr(self, 'lastname'):
-            if not self.firstname:
-                names = self.lastname
-            elif not self.lastname:
-                names = self.firstname
-            else:
-                names = self.firstname + " " + self.lastname
+        names_list = [getattr(self, 'firstname', None), getattr(self, 'middlename', None), getattr(self, 'lastname', None)]
+        names = " ".join([name for name in names_list if name])
 
         extra = []
         if hasattr(self, 'nationality'):
