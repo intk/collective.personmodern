@@ -11,6 +11,7 @@
   <includeDependencies package="." />
   <include package="plone.browserlayer" />
   <include package=".browser" />
+  <include package="plone.behavior"/>
 
   <i18n:registerTranslations directory="locales" />
 
@@ -26,10 +27,22 @@
     provides="collective.personmodern.person.INameFromPersonNames"
     factory="collective.personmodern.person.NameFromPersonNames"
     />
+
+  <plone:behavior
+    description="Adds creator fields."
+    provides=".person.ICreator"
+    for="plone.dexterity.interfaces.IDexterityContent"
+    title="Creator fields"
+    />
     
   <adapter
-    factory=".indexers.lastname"
-    name="lastname"
+    factory=".indexers.person_priref"
+    name="person_priref"
+    />
+
+  <adapter
+    factory=".indexers.objects_count"
+    name="objects_count"
     />
 
 </configure>

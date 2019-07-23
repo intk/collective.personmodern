@@ -3,30 +3,15 @@
        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
        i18n:domain="plone">
     <schema>
-      <field name="firstname" type="zope.schema.TextLine" indexer:searchable="true">
+      <field name="name" type="zope.schema.TextLine" indexer:searchable="true">
         <description />
         <required>False</required>
-        <title i18n:translate="label_person_firstname">First name</title>
+        <title i18n:translate="label_person_name">Name</title>
       </field>
-      <field name="lastname" type="zope.schema.TextLine" indexer:searchable="true">
+      <field name="priref" type="zope.schema.TextLine" indexer:searchable="true">
         <description />
         <required>False</required>
-        <title i18n:translate="label_person_lastname">Last name</title>
-      </field>
-      <field name="middlename" type="zope.schema.TextLine" indexer:searchable="true">
-        <description />
-        <required>False</required>
-        <title i18n:translate="label_person_middlename">Middle name</title>
-      </field>
-      <field name="nationality" type="zope.schema.TextLine" indexer:searchable="true">
-        <description />
-        <required>False</required>
-        <title i18n:translate="label_person_nationality">Nationality</title>
-      </field>
-      <field name="year" type="zope.schema.TextLine" indexer:searchable="true">
-        <description />
-        <required>False</required>
-        <title i18n:translate="label_person_year">Year</title>
+        <title i18n:translate="label_person_priref">priref</title>
       </field>
     </schema>
 </model>
